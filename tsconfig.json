@@ -6,6 +6,7 @@
     "module": "commonjs",
     "noImplicitAny": true,
     "outDir": "./build/",
+    "moduleResolution": "node",
     "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": true,

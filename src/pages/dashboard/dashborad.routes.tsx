@@ -15,7 +15,7 @@ const Restricted = lazy(() => import('src/pages/dashboard/restricted'));
 const RestrictedHistory = lazy(() => import('src/pages/dashboard/restricted-history'));
 const RestrictedSettings = lazy(() => import('src/pages/dashboard/restricted-settings'));
 const Users = lazy(() => import('src/pages/dashboard/users'));
-const AddUser = lazy(() => import('src/pages/dashboard/add-user'));
+const AddUser = lazy(() => import('src/pages/dashboard/add-user-new'));
 const licensePlate = lazy(() => import('src/pages/dashboard/license-plate'));
 const licensePlateHistory = lazy(() => import('src/pages/dashboard/license-plate-history'));
 const camerasList = lazy(() => import('src/pages/dashboard/cameras'));

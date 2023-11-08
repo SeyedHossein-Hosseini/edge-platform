@@ -44,21 +44,21 @@ const EntranceHistory = () => {
   const params = new URLSearchParams(search);
   const { direction, locale } = useSelector((state: AppState) => state.AppSetting);
 
-  const [ faceCameras, setFaceCameras ] = React.useState<any[]>([]);
-  const [ employee, setEmployee ] = React.useState<any[]>([]);
-  const [ records, setRecords ] = useState<Array<number>>([]);
-  const [ loading, setLoading ] = useState<boolean>(false);
-  const [ hasServerError, setHasServerError ] = useState<boolean>(false);
-  const [ count, setCount ] = useState<number>(100);
+  const [faceCameras, setFaceCameras] = React.useState<any[]>([]);
+  const [employee, setEmployee] = React.useState<any[]>([]);
+  const [records, setRecords] = useState<Array<number>>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hasServerError, setHasServerError] = useState<boolean>(false);
+  const [count, setCount] = useState<number>(100);
 
   // Filters
-  const [ selectedFaceCameras, setSelectedFaceCameras ] = React.useState<any[]>(params.get('camera')?.split(',') ?? []);
-  const [ selectedEmployee, setSelectedEmployee ] = React.useState<any[]>(params.get('employee')?.split(',') ?? []);
-  const [ dist, setDist ] = React.useState<number[]>(params.get('dist')?.split(',')?.map((val) => Number(val)) ?? [ 20, 80 ]);
-  const [ startDate, setStartDate ] = useState<moment.Moment>(params.get('start') ? moment(params.get('start')) : null);
-  const [ endDate, setEndDate ] = useState<moment.Moment>(params.get('end') ? moment(params.get('end')) : null);
-  const [ page, setPage ] = useState<number>(parseInt(params.get('page')) || 1);
-  const [ perPage, setPerPage ] = useState<number>(() => {
+  const [selectedFaceCameras, setSelectedFaceCameras] = React.useState<any[]>(params.get('camera')?.split(',') ?? []);
+  const [selectedEmployee, setSelectedEmployee] = React.useState<any[]>(params.get('employee')?.split(',') ?? []);
+  const [dist, setDist] = React.useState<number[]>(params.get('dist')?.split(',')?.map((val) => Number(val)) ?? [20, 80]);
+  const [startDate, setStartDate] = useState<moment.Moment>(params.get('start') ? moment(params.get('start')) : null);
+  const [endDate, setEndDate] = useState<moment.Moment>(params.get('end') ? moment(params.get('end')) : null);
+  const [page, setPage] = useState<number>(parseInt(params.get('page')) || 1);
+  const [perPage, setPerPage] = useState<number>(() => {
     const corrected = Math.min(Math.max(parseInt(params.get('perPage')) || 10, 5), 15);
     if (params.get('perPage')) params.set('perPage', `${corrected}`);
     return corrected;
@@ -108,7 +108,7 @@ const EntranceHistory = () => {
     let selectedEmployeeId: Array<string> = [];
     setLoading((prevState: boolean) => true);
     selectedEmployee.forEach((item: any) => {
-      selectedEmployeeId = [ ...selectedEmployeeId, item['id'] ];
+      selectedEmployeeId = [...selectedEmployeeId, item['id']];
     });
     const queryParams: any = {
       size: perPage,
@@ -166,11 +166,11 @@ const EntranceHistory = () => {
     return () => {
       clearTimeout(timeOutId);
     };
-  }, [ page, startDate, endDate, perPage, dist, selectedEmployee, selectedFaceCameras ]);
+  }, [page, startDate, endDate, perPage, dist, selectedEmployee, selectedFaceCameras]);
 
   useEffect(() => {
-    paginate(parseInt( params.get('page'), 10) || 1);
-  }, [ startDate, endDate, perPage, dist, selectedEmployee, selectedFaceCameras ]);
+    paginate(parseInt(params.get('page'), 10) || 1);
+  }, [startDate, endDate, perPage, dist, selectedEmployee, selectedFaceCameras]);
 
   useEffect(() => {
     moment().locale(locale);
@@ -224,7 +224,7 @@ const EntranceHistory = () => {
             {records.length > 0 && records.map((item: any, index: number) =>
               <Grid item xs={12} lg={12} key={index}>
                 <EntranceLogCard
-                  avatar={'http://10.21.23.174:8000' + item['log']['employee']['avatar']}
+                  avatar={'http://192.168.3.201:8000' + item['log']['employee']['avatar']}
                   cameraName={item['stream_id']}
                   firstName={item['log']['employee']['first_name']}
                   lastName={item['log']['employee']['last_name']}
