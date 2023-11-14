@@ -224,7 +224,7 @@ const EntranceHistory = () => {
             {records.length > 0 && records.map((item: any, index: number) =>
               <Grid item xs={12} lg={12} key={index}>
                 <EntranceLogCard
-                  avatar={'http://192.168.3.201:8000' + item['log']['employee']['avatar']}
+                  avatar={'http://192.168.3.21:8000' + item['log']['employee']['avatar']}
                   cameraName={item['stream_id']}
                   firstName={item['log']['employee']['first_name']}
                   lastName={item['log']['employee']['last_name']}

@@ -256,7 +256,7 @@ const Entrance = () => {
                   key={index}
                 >
                   <EntranceCard
-                    avatarURL={'http://192.168.3.201:8000' + personnelObject[item]['avatarURL']}
+                    avatarURL={'http://192.168.3.21:8000' + personnelObject[item]['avatarURL']}
                     name={`${personnelObject[item]['firstName']} ${personnelObject[item]['lastName']}`}
                     position={`Cam: ${personnelObject[item]['streamNumber']}`}
                     organization={`Conf: ${(personnelObject[item]['maxConfidence']) ?? 0}`}

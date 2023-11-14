@@ -91,6 +91,9 @@
 
 // export default AddUser;
 
+
+
+
 import { useState, useEffect, Fragment, ReactNode } from 'react';
 import { styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -116,7 +119,7 @@ import EntranceHistoryProfile from './add-user-entrance-history';
 import VideoRecorder from '../record-video/record-video';
 import HelpUser from '../video-help-user/video-help-user';
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+const steps = ['Personal Information', 'Help video', 'Record Video', 'Get user images'];
 
 const EnrollUserStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -174,18 +177,21 @@ const EnrollUserStepper = () => {
         </Fragment>
       ) : (
         <MuiPickersUtilsProvider libInstance={jMoment} utils={momentUtils} locale={locale}>
-          <Box>
-            <Typography>{steps[activeStep]}</Typography>
-          </Box>
+          <Typography sx={{ marginBottom: '10px' }} component="h1" variant="h5" align="center">
+            {steps[activeStep]}
+          </Typography>
           <Fragment>
             <Box className={classes.TabsItemWrapper} hidden={activeStep !== 0} role="tabpanel">
               <PersonalInformationForm employeeID={employeeID} onFormSubmitted={handlePersonalFormSubmit} />
             </Box>
             <Box className={classes.TabsItemWrapper} hidden={activeStep !== 1} role="tabpanel">
-              <VideoRecorder />
+              <HelpUser />
             </Box>
             <Box className={classes.TabsItemWrapper} hidden={activeStep !== 2} role="tabpanel">
-              <HelpUser />
+              <VideoRecorder />
+            </Box>
+            <Box className={classes.TabsItemWrapper} hidden={activeStep !== 3} role="tabpanel">
+              <FaceAuthorizationForm employeeID={employeeID} />
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
@@ -209,3 +215,17 @@ const EnrollUserStepper = () => {
 }
 
 export default EnrollUserStepper;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
