@@ -244,6 +244,17 @@
     "helpVideo": "Help Video",
     "recordVideo": "Record Video",
     "ConfirmPhotos": "Confirm Photos" 
+  },
+
+  "VideoHelper": {
+    "videoWatched": "Video watched"
+  },
+
+  "VideoRecorder": {
+    "getCamera": "Get Permission",
+    "recordVideo": "Record Video",
+    "stopVideo": "Stop Video",
+    "confirmVideo": "Confirm"
   }
 
 }

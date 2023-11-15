@@ -244,6 +244,17 @@
     "helpVideo": "ویدیوی راهنما",
     "recordVideo": "ضبط ویدیو",
     "ConfirmPhotos": "تایید تصاویر چهره" 
+  },
+
+  "VideoHelper": {
+    "videoWatched": "ویدیو را دیدم"
+  },
+
+    "VideoRecorder": {
+    "getCamera": "اجازه دسترسی",
+    "recordVideo": "ضبط ویدیو",
+    "stopVideo": "توقف ویدیو",
+    "confirmVideo": "تایید و ثبت"
   }
 
 }

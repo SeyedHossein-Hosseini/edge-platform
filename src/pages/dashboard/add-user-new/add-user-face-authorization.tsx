@@ -79,14 +79,17 @@ const FaceAuthorizationForm: React.FC<FaceAuthorizationFormProps> = (props: Face
         formData.append(item, values[item]);
       }
     });
-    addEmployeeFace(formData).subscribe({
-      next: (res: any) => {
-        setFaceRecFiles([]);
-        getEmployeeDefinedFacesQuery();
-      },
-      error: (error) => console.warn('error'),
-      complete: () => setIsWaiting((prevState: boolean) => false),
-    });
+
+    setIsWaiting((prevState: boolean) => false)
+
+    // addEmployeeFace(formData).subscribe({
+    //   next: (res: any) => {
+    //     setFaceRecFiles([]);
+    //     getEmployeeDefinedFacesQuery();
+    //   },
+    //   error: (error) => console.warn('error'),
+    //   complete: () => setIsWaiting((prevState: boolean) => false),
+    // });
   };
 
   const removeItemFromUploadBox = (index: number) => {

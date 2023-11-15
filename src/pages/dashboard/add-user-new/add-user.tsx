@@ -118,6 +118,7 @@ import FaceAuthorizationForm from './add-user-face-authorization';
 import EntranceHistoryProfile from './add-user-entrance-history';
 import VideoRecorder from '../record-video/record-video';
 import HelpUser from '../video-help-user/video-help-user';
+import { Container } from '@material-ui/core';
 
 
 
@@ -125,7 +126,6 @@ const steps = ['personalInformation', 'helpVideo', 'recordVideo', 'ConfirmPhotos
 
 const EnrollUserStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set<number>());
   const { id } = useParams<{ id: string }>();
   const [employeeID, setEmployeeID] = useState<string>(id);
   const classes = useStyle();
@@ -134,17 +134,16 @@ const EnrollUserStepper = () => {
   const { t } = useTranslation();
 
 
+
+
+
   useEffect(() => {
     moment().locale(locale);
   }, [locale]);
 
   const handleNext = () => {
-    let newSkipped = skipped;
-
-
     // using this arrow function, gives you the old value of the page
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = () => {
@@ -159,66 +158,111 @@ const EnrollUserStepper = () => {
     console.log("submit")
   };
 
+  const getStepContent = (step: number) => {
+    switch (step) {
+      case 0:
+        return <PersonalInformationForm employeeID={employeeID} activeStep={setActiveStep} onFormSubmitted={handlePersonalFormSubmit} />;
+      case 1:
+        return <VideoRecorder activeStep={setActiveStep} />;
+      case 2:
+        return <HelpUser activeStep={setActiveStep} />;
+      case 3:
+        return <FaceAuthorizationForm employeeID={employeeID} />;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
+
+
   return (
-    <Box sx={{ width: '100%' }}>
-      <Stepper activeStep={activeStep} sx={{ padding: '10px' }}>
-        {steps.map((label, index) => {
-          const stepProps: { completed?: boolean } = {};
-          return (
-            <Step key={label} {...stepProps} sx={{ padding: '10px' }}>
-              <StepLabel sx={{ padding: '10px', margin: '5px' }}>{t(`AddUsersStepper.${steps[index]}`)}</StepLabel>
-              {/* <StepLabel sx={{ padding: '10px' }}>{t(`AddUsersStepper.personalInformation`)}</StepLabel> */}
-            </Step>
-          );
-        })}
-      </Stepper>
-      {activeStep === steps.length ? (
-        <Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
-        </Fragment>
-      ) : (
-        <MuiPickersUtilsProvider libInstance={jMoment} utils={momentUtils} locale={locale}>
-          <Typography sx={{ marginBottom: '10px' }} component="h1" variant="h5" align="center">
-            {t(`AddUsersStepper.${steps[activeStep]}`)}
-          </Typography>
-          <Fragment>
-            <Box className={classes.TabsItemWrapper} hidden={activeStep !== 0} role="tabpanel">
-              <PersonalInformationForm employeeID={employeeID} onFormSubmitted={handlePersonalFormSubmit} />
-            </Box>
-            <Box className={classes.TabsItemWrapper} hidden={activeStep !== 1} role="tabpanel">
-              <HelpUser />
-              {/* <TestLangSwitch /> */}
-            </Box>
-            <Box className={classes.TabsItemWrapper} hidden={activeStep !== 2} role="tabpanel">
-              <VideoRecorder />
-            </Box>
-            <Box className={classes.TabsItemWrapper} hidden={activeStep !== 3} role="tabpanel">
-              <FaceAuthorizationForm employeeID={employeeID} />
-            </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
-            </Box>
-          </Fragment>
-        </MuiPickersUtilsProvider>
-      )}
-    </Box>
+    <React.Fragment>
+      <Box component="main" maxWidth="md" sx={{ mb: 1 }}>
+        <Box sx={{ my: { xs: 1, md: 1 }, p: { xs: 1, md: 1 } }}>
+          <MuiPickersUtilsProvider libInstance={jMoment} utils={momentUtils} locale={locale}>
+
+            <Typography component="h1" variant="h4" align="center">
+              {t(`AddUsersStepper.${steps[activeStep]}`)}
+            </Typography>
+            <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+              {steps.map((label, index) => (
+                <Step key={index}>
+                  <StepLabel>{t(`AddUsersStepper.${steps[index]}`)}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+
+            <>
+              {getStepContent(activeStep)}
+            </>
+
+          </MuiPickersUtilsProvider>
+        </Box>
+      </Box>
+    </React.Fragment >
+
+
+
+
+
+    // <Box sx={{ width: '100%' }}>
+    //   <Stepper activeStep={activeStep} sx={{ padding: '10px' }}>
+    //     {steps.map((label, index) => {
+    //       const stepProps: { completed?: boolean } = {};
+    //       return (
+    //         <Step key={label} {...stepProps} sx={{ padding: '10px' }}>
+    //           <StepLabel sx={{ padding: '10px', margin: '5px' }}>{t(`AddUsersStepper.${steps[index]}`)}</StepLabel>
+    //           {/* <StepLabel sx={{ padding: '10px' }}>{t(`AddUsersStepper.personalInformation`)}</StepLabel> */}
+    //         </Step>
+    //       );
+    //     })}
+    //   </Stepper>
+    //   {activeStep === steps.length ? (
+    //     <Fragment>
+    //       <Typography sx={{ mt: 2, mb: 1 }}>
+    //         All steps completed - you&apos;re finished
+    //       </Typography>
+    //       <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+    //         <Box sx={{ flex: '1 1 auto' }} />
+    //         <Button onClick={handleReset}>Reset</Button>
+    //       </Box>
+    //     </Fragment>
+    //   ) : (
+    //     <MuiPickersUtilsProvider libInstance={jMoment} utils={momentUtils} locale={locale}>
+    //       <Typography sx={{ marginBottom: '10px' }} component="h1" variant="h5" align="center">
+    //         {t(`AddUsersStepper.${steps[activeStep]}`)}
+    //       </Typography>
+    //       <Fragment>
+    //         <Box className={classes.TabsItemWrapper} hidden={activeStep !== 0} role="tabpanel">
+    //           <PersonalInformationForm employeeID={employeeID} activeStep={setActiveStep} onFormSubmitted={handlePersonalFormSubmit} />
+    //         </Box>
+    //         <Box className={classes.TabsItemWrapper} hidden={activeStep !== 1} role="tabpanel">
+    //           <HelpUser activeStep={setActiveStep} />
+    //           {/* <TestLangSwitch /> */}
+    //         </Box>
+    //         <Box className={classes.TabsItemWrapper} hidden={activeStep !== 2} role="tabpanel">
+    //           <VideoRecorder />
+    //         </Box>
+    //         <Box className={classes.TabsItemWrapper} hidden={activeStep !== 3} role="tabpanel">
+    //           <FaceAuthorizationForm employeeID={employeeID} />
+    //         </Box>
+    //         {/* <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+    //           <Button
+    //             color="inherit"
+    //             disabled={activeStep === 0}
+    //             onClick={handleBack}
+    //             sx={{ mr: 1 }}
+    //           >
+    //             Back
+    //           </Button>
+    //           <Box sx={{ flex: '1 1 auto' }} />
+    //           <Button onClick={handleNext}>
+    //             {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+    //           </Button>
+    //         </Box> */}
+    //       </Fragment>
+    //     </MuiPickersUtilsProvider>
+    //   )}
+    // </Box>
   );
 }
 
