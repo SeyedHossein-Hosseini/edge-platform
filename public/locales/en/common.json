@@ -237,5 +237,13 @@
     "cameraLastActivity": "Last Activity",
     "cameraStatus": "Status",
     "cameraActions": "Actions"
+  },
+
+  "AddUsersStepper": {
+    "personalInformation": "Personal Information",
+    "helpVideo": "Help Video",
+    "recordVideo": "Record Video",
+    "ConfirmPhotos": "Confirm Photos" 
   }
+
 }

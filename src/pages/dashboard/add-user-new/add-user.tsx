@@ -119,7 +119,9 @@ import EntranceHistoryProfile from './add-user-entrance-history';
 import VideoRecorder from '../record-video/record-video';
 import HelpUser from '../video-help-user/video-help-user';
 
-const steps = ['Personal Information', 'Help video', 'Record Video', 'Get user images'];
+
+
+const steps = ['personalInformation', 'helpVideo', 'recordVideo', 'ConfirmPhotos'];
 
 const EnrollUserStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -129,8 +131,12 @@ const EnrollUserStepper = () => {
   const classes = useStyle();
   const history = useHistory();
   const { direction, locale } = useSelector((state: AppState) => state.AppSetting);
+  const { t } = useTranslation();
 
 
+  useEffect(() => {
+    moment().locale(locale);
+  }, [locale]);
 
   const handleNext = () => {
     let newSkipped = skipped;
@@ -160,7 +166,8 @@ const EnrollUserStepper = () => {
           const stepProps: { completed?: boolean } = {};
           return (
             <Step key={label} {...stepProps} sx={{ padding: '10px' }}>
-              <StepLabel sx={{ padding: '10px' }}>{label}</StepLabel>
+              <StepLabel sx={{ padding: '10px', margin: '5px' }}>{t(`AddUsersStepper.${steps[index]}`)}</StepLabel>
+              {/* <StepLabel sx={{ padding: '10px' }}>{t(`AddUsersStepper.personalInformation`)}</StepLabel> */}
             </Step>
           );
         })}
@@ -178,7 +185,7 @@ const EnrollUserStepper = () => {
       ) : (
         <MuiPickersUtilsProvider libInstance={jMoment} utils={momentUtils} locale={locale}>
           <Typography sx={{ marginBottom: '10px' }} component="h1" variant="h5" align="center">
-            {steps[activeStep]}
+            {t(`AddUsersStepper.${steps[activeStep]}`)}
           </Typography>
           <Fragment>
             <Box className={classes.TabsItemWrapper} hidden={activeStep !== 0} role="tabpanel">
@@ -186,6 +193,7 @@ const EnrollUserStepper = () => {
             </Box>
             <Box className={classes.TabsItemWrapper} hidden={activeStep !== 1} role="tabpanel">
               <HelpUser />
+              {/* <TestLangSwitch /> */}
             </Box>
             <Box className={classes.TabsItemWrapper} hidden={activeStep !== 2} role="tabpanel">
               <VideoRecorder />

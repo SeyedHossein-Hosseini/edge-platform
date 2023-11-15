@@ -237,5 +237,13 @@
     "cameraLastActivity": "آخرین فعالیت",
     "cameraStatus": "وضعیت در شبکه",
     "cameraActions": "امکانات"
+  },
+
+  "AddUsersStepper": {
+    "personalInformation": "اطلاعات شخصی",
+    "helpVideo": "ویدیوی راهنما",
+    "recordVideo": "ضبط ویدیو",
+    "ConfirmPhotos": "تایید تصاویر چهره" 
   }
+
 }
