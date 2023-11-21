@@ -55,7 +55,7 @@ Minimum node version: 14
 
 1. First clone the project:
 ```
-git https://git.sensifai.com/front-end/edge-platform.git
+git https://git.dibarayan.ir/ghadirrnd/biometric-authentication/sentelligence/edge-platform-cra.git
 ```
 2. Install dependencies:
 ```
