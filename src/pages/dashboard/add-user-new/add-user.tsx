@@ -161,13 +161,13 @@ const EnrollUserStepper = () => {
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return <PersonalInformationForm employeeID={employeeID} activeStep={setActiveStep} onFormSubmitted={handlePersonalFormSubmit} />;
-      case 1:
-        return <VideoRecorder activeStep={setActiveStep} />;
-      case 2:
         return <HelpUser activeStep={setActiveStep} />;
-      case 3:
-        return <FaceAuthorizationForm employeeID={employeeID} />;
+        case 1:
+          return <VideoRecorder activeStep={setActiveStep} />;
+        case 2:
+          return <PersonalInformationForm employeeID={employeeID} activeStep={setActiveStep} onFormSubmitted={handlePersonalFormSubmit} />;
+        case 3:
+          return <FaceAuthorizationForm employeeID={employeeID} />;
       default:
         throw new Error('Unknown step');
     }

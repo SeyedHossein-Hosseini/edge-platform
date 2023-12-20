@@ -84,6 +84,15 @@ const getFaceCamerasList = ( queryParams?: any ): Observable<any> => {
   }) as Observable<any>;
 };
 
+
+const getCsvLink = ( queryParams?: any ): Observable<any> => {
+  return api.get<any>({
+    url: 'api/log_face_csv/export_csv/',
+    queryParams,
+    shouldAuth: true,
+  }) as Observable<any>;
+};
+
 const getLicensePlateCamerasList = ( queryParams?: any ): Observable<any> => {
   return api.get<any>({
     url: 'api/log_anpr/get_available_cameras/',
@@ -120,4 +129,5 @@ export {
   getRestrictedAreaSingleFrame,
   saveRestrictedAreaPolygonPoints,
   getRestrictedAreaPolygonsPoints,
+  getCsvLink
 };

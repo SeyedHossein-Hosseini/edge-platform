@@ -31,7 +31,6 @@ const VideoRecorder = (props: any) => {
   }, [])
 
   const getCameraPermission = async () => {
-    console.log("Permission");
     setRecordedVideo(null);
     //get video and audio permissions and then stream the result media stream to the videoSrc variable
     if ("MediaRecorder" in window) {
@@ -47,6 +46,7 @@ const VideoRecorder = (props: any) => {
 
         setPermission(true);
 
+        //combine both audio and video streams
 
         const combinedStream = new MediaStream([
           ...videoStream.getVideoTracks(),
@@ -57,13 +57,10 @@ const VideoRecorder = (props: any) => {
         //set videostream to live feed player
         liveVideoFeed.current.srcObject = videoStream;
       } catch (err) {
-        console.log(`Can not access to your camera`);
-        // getCameraPermission();
-        return;
+        alert(err);
       }
     } else {
-      console.log(`The MediaRecorder API is not supported in your browser.`);
-      return;
+      alert("The MediaRecorder API is not supported in your browser.");
     }
   };
 
@@ -71,6 +68,7 @@ const VideoRecorder = (props: any) => {
     setRecordingStatus("recording");
 
     const media = new MediaRecorder(stream, { mimeType });
+
 
     mediaRecorder.current = media;
 
@@ -87,7 +85,7 @@ const VideoRecorder = (props: any) => {
     setVideoChunks(localVideoChunks);
   };
 
-  const blobToBase64 = (blob: Blob) => {
+  const videoBlobToBase64 = (blob: Blob) => {
     return new Promise((resolve, _) => {
       const reader = new FileReader();
       reader.onloadend = () => resolve(reader.result);
@@ -103,7 +101,7 @@ const VideoRecorder = (props: any) => {
     mediaRecorder.current.onstop = async () => {
       const videoBlob = new Blob(videoChunks, { type: mimeType });
       const videoUrl: any = URL.createObjectURL(videoBlob);
-      const base65 = await blobToBase64(videoBlob);
+      const base65 = await videoBlobToBase64(videoBlob);
       console.log(base65);
 
       setRecordedVideo(videoUrl);

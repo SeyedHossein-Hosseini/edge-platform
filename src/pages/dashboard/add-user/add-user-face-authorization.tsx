@@ -38,6 +38,7 @@ import {
   Select,
   Typography,
 } from '@material-ui/core';
+import { environment } from '../../../../environments/environment';
 
 export interface FaceAuthorizationFormProps {
   employeeID?: string
@@ -215,7 +216,7 @@ const FaceAuthorizationForm: React.FC<FaceAuthorizationFormProps> = (props: Face
 
   const showSingleImage = () => {
     const item = definedFaces.find((obj: any) => obj['id'].toString() === imageOptions['attributes']['data-faceid']['value']);
-    window.open('http://192.168.3.21:8000' + item['face_image'], '_blank', 'noopener,noreferrer,');
+    window.open(environment.apiAddress + item['face_image'], '_blank', 'noopener,noreferrer,');
   };
 
   const faceFormik = useFormik({

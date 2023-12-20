@@ -1,5 +1,5 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-
+import { green } from '@material-ui/core/colors';
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
     header: {
@@ -23,6 +23,32 @@ const useStyle = makeStyles((theme: Theme) =>
       justifyContent: 'center',
       width: '100%',
       marginTop: theme.spacing(2),
+    },
+    csvAlert: {
+      textAlign: 'center'
+    },
+    exportCsvRoot: {
+      display: "flex",
+      alignItems: "center",
+    },
+    exportCsvWrapper: {
+      margin: theme.spacing(1),
+      position: "relative",
+      width: "100%"
+    },
+    exportCsvButtonSuccess: {
+      backgroundColor: green[500],
+      "&:hover": {
+        backgroundColor: green[700],
+      },
+    },
+    exportCsvbuttonProgress: {
+      color: green[500],
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      marginTop: -12,
+      marginLeft: -12,
     },
   })
 );
