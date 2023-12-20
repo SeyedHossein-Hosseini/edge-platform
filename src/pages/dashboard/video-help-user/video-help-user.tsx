@@ -4,7 +4,7 @@ import { Button, Grid } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next'
 import 'moment/locale/fa.js';
-// import helpVideo from "../../../assets/helpUser.mp4"
+import helpVideo from "/public/helpUser.mp4"
 
 export interface VideoHelpFormProps {
   activeStep?: any,
@@ -23,7 +23,7 @@ const HelpUser: React.FC<VideoHelpFormProps> = (props: VideoHelpFormProps) => {
           component="video"
           sx={{ width: '100%', maxWidth: '600px', m: 'auto' }}
           controls
-          src="file:///C:/Users/Hossein/Downloads/Telegram%20Desktop/video%20sample.mp4"
+          src={helpVideo}
         />
 
         <Button onClick={videoWatched} color="primary" variant="contained" type="submit" size="large">

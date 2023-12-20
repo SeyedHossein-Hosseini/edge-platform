@@ -208,7 +208,8 @@
     "logTitle": "Restricted Area Logs",
     "galleryBtn": "Check Gallery",
     "galleryCount": "Recorded Frames Count:",
-    "configTitle": "Restricted Config"
+    "configTitle": "Restricted Config",
+    "ExportCsv": "Export CSV"
   },
   "pages": {
     "baseTitle": "Edge Platform",

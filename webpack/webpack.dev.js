@@ -55,7 +55,7 @@ module.exports = (env = {}) => {
     module: {
       rules: [
         {
-          test: /\.(jpg|jpeg|png|gif|svg|pdf|woff|woff2|eot|ttf|ico)$/,
+          test: /\.(jpg|jpeg|png|gif|svg|pdf|woff|woff2|eot|ttf|ico|mp4)$/,
           use: [
             {
               loader: 'file-loader',

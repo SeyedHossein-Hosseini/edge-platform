@@ -18,6 +18,12 @@ declare module '*.jpeg' {
   export default value;
 }
 
+declare module '*.mp4' {
+  const src: any;
+  export default src;
+}
+
+declare module 'MediaRecorder';
 declare module '*.eot';
 declare module '*.ttf';
 declare module '*.woff2';
