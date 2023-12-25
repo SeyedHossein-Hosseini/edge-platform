@@ -209,7 +209,8 @@
     "galleryBtn": "Check Gallery",
     "galleryCount": "Recorded Frames Count:",
     "configTitle": "Restricted Config",
-    "ExportCsv": "Export CSV"
+    "ExportCsv": "Export CSV",
+    "successDownloadCsv": "File downloaded successfully"
   },
   "pages": {
     "baseTitle": "Edge Platform",

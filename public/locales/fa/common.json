@@ -209,7 +209,8 @@
     "galleryBtn": "مشاهده تصاویر",
     "galleryCount": "تعداد تصاویر ضبط شده:",
     "configTitle": "تنظیمات مناطق ممنوعه",
-    "ExportCsv": "دریافت گزارش"
+    "ExportCsv": "دریافت گزارش",
+    "successDownloadCsv": "فایل با موفقیت دانلود شد"
   },
   "pages": {
     "baseTitle": "سیستم مدیریت هوشمند",

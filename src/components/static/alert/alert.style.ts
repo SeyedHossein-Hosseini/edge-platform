@@ -6,8 +6,9 @@ interface IStyle {
 
 export const useStyle = makeStyles(() =>
   createStyles({
-    csvAlert: {
-      textAlign: 'center'
-    },
+    exportCsvAlertCloseIcon: {
+      marginLeft: 'auto',
+      fontSize: '5px',
+    }
   })
 );

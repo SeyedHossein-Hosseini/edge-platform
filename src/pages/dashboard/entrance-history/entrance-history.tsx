@@ -15,6 +15,8 @@ import {
   Tooltip,
   Typography,
   CircularProgress,
+  Snackbar,
+  Collapse,
 } from "@material-ui/core";
 import {
   Cached,
@@ -44,7 +46,8 @@ import {
   getFaceCamerasList,
   getCsvLink,
 } from "src/services/api/service-config.api";
-import { Toast } from "src/components/static/toast";
+
+import AlertComponent from "src/components/static/alert/alert";
 
 const EntranceHistory = () => {
   const timePickerFormat = "YYYY/MM/DD HH:mm";
@@ -64,6 +67,8 @@ const EntranceHistory = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [hasServerError, setHasServerError] = useState<boolean>(false);
   const [count, setCount] = useState<number>(100);
+
+  const [exportCsvAlert, setExportCsvAlert] = useState<boolean>(true);
 
   const [exportCsvMessage, setExportCsvMessage] = useState<string>("");
   const [exportCsvColor, setExportCsvColor] = useState<Color>(null);
@@ -300,6 +305,7 @@ const EntranceHistory = () => {
     moment().locale(locale);
     getEmployeeList(10);
     getFaceCameraList();
+    setExportCsvMessage("");
   }, []);
 
   useEffect(() => {
@@ -545,15 +551,32 @@ const EntranceHistory = () => {
             </Grid>
 
             <Grid item xs={12} lg={12}>
-              {exportCsvMessage && (
+              {/* <Collapse in={exportCsvAlert}>
                 <Alert
-                  icon={false}
                   variant="filled"
-                  severity={exportCsvColor}
-                  className={classes.csvAlert}
+                  severity="error"
+                  onClose={() => {
+                    setExportCsvAlert(false);
+                  }}
                 >
-                  {exportCsvMessage}
+                  {t("restricted.ExportCsv")}
                 </Alert>
+              </Collapse> */}
+
+              {/* <AlertComponent
+                isSuccess={false}
+                exportCsvMessage={t("restricted.ExportCsv")}
+              /> */}
+
+              {exportCsvMessage && (
+                <AlertComponent
+                  isSuccess={exportCsvSuccess}
+                  exportCsvMessage={
+                    exportCsvSuccess
+                      ? t("restricted.successDownloadCsv")
+                      : t("general.serverError")
+                  }
+                />
               )}
             </Grid>
           </Grid>
